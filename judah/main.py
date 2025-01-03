@@ -1,8 +1,5 @@
-from fastapi import FastAPI
+import os
 
-app = FastAPI()
+from judah.openai_connector import OpenAIConnector
 
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+openai = OpenAIConnector(api_key=os.environ.get("OPENAI_API_KEY"))
