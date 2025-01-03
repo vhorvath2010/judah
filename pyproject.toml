@@ -9,6 +9,11 @@ package-mode = false
 [tool.poetry.dependencies]
 python = "^3.10"
 openai = "^1.58.1"
+speechrecognition = "^3.13.0"
+pyaudio = "^0.2.14"
+llvmlite = "^0.43.0"
+numba = "^0.60.0"
+openai-whisper = "^20240930"
 
 
 [build-system]

@@ -1,12 +1,26 @@
 import logging
-import os
+import warnings
 
-from judah.openai_connector import OpenAIConnector
+import speech_recognition as sr
 
 logging.basicConfig(level=logging.INFO)
+# Ignore annoying PyTorch warning from Whisper
+warnings.filterwarnings("ignore", category=FutureWarning)
 
-logger = logging.getLogger(__name__)
+microphones = sr.Microphone().list_working_microphones()
+print("Working microphones found: ", microphones)
+microphone_index = int(input("Please select a microphone:"))
 
-logger.info("Connecting to OpenAI...")
-openai = OpenAIConnector(api_key=os.environ.get("OPENAI_API_KEY"))
-logger.info("Connected to OpenAI successfully!")
+recognizer = sr.Recognizer()
+with sr.Microphone(device_index=microphone_index) as source:
+    logging.info("Say something!")
+    audio = recognizer.listen(source)
+    try:
+        print(
+            "Whisper thinks you said:",
+            recognizer.recognize_whisper(audio, language="english", model="base.en"),
+        )
+    except sr.UnknownValueError:
+        print("Whisper could not understand audio")
+    except sr.RequestError as e:
+        print(f"Could not request results from Whisper; {e}")
