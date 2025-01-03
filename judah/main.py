@@ -1,4 +1,5 @@
 import logging
+from time import sleep
 import warnings
 
 import speech_recognition as sr
@@ -16,14 +17,15 @@ microphone_index = int(input("Please select a microphone (by index): "))
 recognizer = sr.Recognizer()
 try:
     with sr.Microphone(device_index=microphone_index) as source:
-        logging.info("Listening... Speak into the microphone.")
         recognizer.adjust_for_ambient_noise(source)
-
+        recognizer.pause_threshold = 1.5
+        sleep(1)  # Wait for the recognizer to adjust to the ambient noise
+        logging.info("Listening... Speak into the microphone.")
         # Continuous listening
         while True:
             try:
                 logging.info("Listening for a phrase...")
-                audio = recognizer.listen(source, timeout=None, phrase_time_limit=5)
+                audio = recognizer.listen(source, timeout=None)
                 result = recognizer.recognize_whisper(
                     audio, language="english", model="base.en"
                 )
