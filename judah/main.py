@@ -3,7 +3,7 @@ import warnings
 
 import speech_recognition as sr
 
-from judah.dependencies import conversation_manager, audio_input_engine
+from judah.dependencies import conversation_runner, audio_input_engine
 
 logging.basicConfig(level=logging.INFO)
 warnings.filterwarnings("ignore", category=FutureWarning)  # Ignore annoying PyTorch warning from Whisper
@@ -25,8 +25,7 @@ def get_next_conversation_starter() -> str:
 
 
 if __name__ == '__main__':
-    print(
-        'J.U.D.A.H. is active! Speak into the selected microphone using the "Judah" wake word anywhere in your commands.')
     while True:
+        print('Say a phrase including the "Judah" wake word to start a new conversation!')
         user_message = get_next_conversation_starter()
-        conversation_manager.run_conversation_to_completion(starting_user_message=user_message)
+        conversation_runner.run_conversation_to_completion(starting_user_message=user_message)

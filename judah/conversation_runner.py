@@ -1,13 +1,20 @@
+from judah.audio.audio_input_engine import AudioInputEngine
 from judah.openai_connector import OpenAIConnector
 
 
-class ConversationManager:
-    def __init__(self, openai_connector: OpenAIConnector):
+class ConversationRunner:
+    def __init__(self, openai_connector: OpenAIConnector, audio_input_engine: AudioInputEngine):
         self._openai_connector = openai_connector
+        self._audio_input_engine = audio_input_engine
 
     def run_conversation_to_completion(self, starting_user_message: str):
         self._run_user_command(user_message=starting_user_message)
-        # TODO: continue running user queries until JUDAH emits an end conversation function call
+        while True:
+            user_message = self._audio_input_engine.listen_for_user_message()
+            if "exit" in user_message.lower():  # TODO: Replace with dynamic OpenAI "exit conversation" function call
+                print("Judah: Goodbye!")
+                break
+            self._run_user_command(user_message=user_message)
 
     def _run_user_command(self, user_message: str):
         print(f"You: {user_message}")
