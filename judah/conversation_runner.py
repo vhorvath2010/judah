@@ -39,7 +39,7 @@ class ConversationRunner:
         for chunk in stream:
             if chunk.choices[0].delta.content is not None:
                 self._audio_output_engine.say(chunk.choices[0].delta.content)
-                print(chunk.choices[0].delta.content)
+                print(chunk.choices[0].delta.content, end="")
             if chunk.choices[0].delta.tool_calls is not None:
                 for tool_call in chunk.choices[0].delta.tool_calls:
                     return self._function_invoker.invoke_function_by_name(
