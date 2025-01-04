@@ -41,3 +41,4 @@ class ConversationRunner:
                         tool_call.function.name
                     )
         print("\n")
+        return None

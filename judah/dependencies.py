@@ -10,8 +10,11 @@ end_conversation_function = EndConversationFunction()
 available_functions = [end_conversation_function]
 function_invoker = FunctionInvoker(available_functions=available_functions)
 
+openai_api_key = os.environ.get("OPENAI_API_KEY")
+if openai_api_key is None:
+    raise ValueError("You must set the OPENAI_API_KEY environment variable!")
 openai_connector = OpenAIConnector(
-    api_key=os.environ.get("OPENAI_API_KEY"),
+    api_key=openai_api_key,
     available_tools=[function.get_description() for function in available_functions],
 )
 

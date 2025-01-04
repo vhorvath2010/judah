@@ -13,17 +13,9 @@ warnings.filterwarnings(
 
 def get_next_conversation_starter() -> str:
     while True:
-        try:
-            result = audio_input_engine.listen_for_user_message()
-            if "judah" in result.lower():
-                return result
-        except sr.UnknownValueError:
-            print("Whisper could not understand the audio.")
-        except sr.RequestError as e:
-            print(f"Could not request results from Whisper; {e}")
-        except KeyboardInterrupt:
-            print("\nExiting...")
-            break
+        result = audio_input_engine.listen_for_user_message()
+        if "judah" in result.lower():
+            return result
 
 
 if __name__ == "__main__":
