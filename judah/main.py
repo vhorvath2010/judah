@@ -7,8 +7,7 @@ import speech_recognition as sr
 from judah.dependencies import openai_connector
 
 logging.basicConfig(level=logging.INFO)
-# Ignore annoying PyTorch warning from Whisper
-warnings.filterwarnings("ignore", category=FutureWarning)
+warnings.filterwarnings("ignore", category=FutureWarning)  # Ignore annoying PyTorch warning from Whisper
 
 microphones = sr.Microphone.list_microphone_names()
 print("Working microphones found:")
@@ -23,7 +22,6 @@ try:
         recognizer.pause_threshold = 1.5
         sleep(1)  # Wait for the recognizer to adjust to the ambient noise
         logging.info("Listening... Speak into the microphone.")
-        # Continuous listening
         while True:
             try:
                 logging.info("Listening for a phrase...")
