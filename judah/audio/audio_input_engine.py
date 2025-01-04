@@ -26,4 +26,9 @@ class AudioInputEngine:
             result = str(self._recognizer.recognize_whisper(
                 audio, language="english", model="base.en"
             ))
+            while result == "":
+                audio = self._recognizer.listen(active_microphone, timeout=None)
+                result = str(self._recognizer.recognize_whisper(
+                    audio, language="english", model="base.en"
+                ))
             return result
