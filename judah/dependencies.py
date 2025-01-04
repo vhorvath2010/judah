@@ -1,6 +1,7 @@
 import os
 
 from judah.audio.audio_input_engine import AudioInputEngine
+from judah.audio.audio_output_engine import AudioOutputEngine
 from judah.conversation_runner import ConversationRunner
 from judah.functions.end_conversation import EndConversationFunction
 from judah.functions.function_invoker import FunctionInvoker
@@ -19,9 +20,11 @@ openai_connector = OpenAIConnector(
 )
 
 audio_input_engine = AudioInputEngine()
+audio_output_engine = AudioOutputEngine()
 
 conversation_runner = ConversationRunner(
     openai_connector=openai_connector,
     audio_input_engine=audio_input_engine,
+    audio_output_engine=audio_output_engine,
     function_invoker=function_invoker,
 )

@@ -11,7 +11,7 @@ class EndConversationFunction(OpenAIFunction):
             "type": "function",
             "function": {
                 "name": "end_conversation",
-                "description": "Ends the current conversation with the user. Should be called either when the user asks to end the conversation or the conversation has reached a natural conclusion.",
+                "description": "Should be called when the user says they want to end the conversation",
             },
         }
 
