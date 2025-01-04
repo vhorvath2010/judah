@@ -19,6 +19,7 @@ openai-whisper = "^20240930"
 [tool.poetry.group.dev.dependencies]
 black = "^24.10.0"
 mypy = "^1.14.1"
+pre-commit = "^4.0.1"
 
 [build-system]
 requires = ["poetry-core"]
