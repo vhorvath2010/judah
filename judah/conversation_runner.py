@@ -26,6 +26,7 @@ class ConversationRunner:
             user_message = self._audio_input_engine.listen_for_user_message()
             command_result = self._run_user_command(user_message=user_message)
             if command_result == FunctionSignal.STOP_CONVERSATION:
+                print("Judah: Goodbye!")
                 self._audio_output_engine.say("Goodbye!")
                 break
 
@@ -34,12 +35,15 @@ class ConversationRunner:
         stream = self._openai_connector.create_completion(
             messages=[{"role": "user", "content": user_message}]
         )
+        print("Judah: ", end="")
         for chunk in stream:
             if chunk.choices[0].delta.content is not None:
                 self._audio_output_engine.say(chunk.choices[0].delta.content)
+                print(chunk.choices[0].delta.content)
             if chunk.choices[0].delta.tool_calls is not None:
                 for tool_call in chunk.choices[0].delta.tool_calls:
                     return self._function_invoker.invoke_function_by_name(
                         tool_call.function.name
                     )
+        print("\n")
         return None
