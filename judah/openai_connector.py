@@ -20,5 +20,5 @@ class OpenAIConnector:
             model=OPENAI_MODEL_VERSION,
             messages=messages,
             stream=True,
-            tools=self._available_tools
+            tools=self._available_tools,
         )

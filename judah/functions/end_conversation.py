@@ -12,7 +12,7 @@ class EndConversationFunction(OpenAIFunction):
             "function": {
                 "name": "end_conversation",
                 "description": "Ends the current conversation with the user. Should be called either when the user asks to end the conversation or the conversation has reached a natural conclusion.",
-            }
+            },
         }
 
     def invoke(self):

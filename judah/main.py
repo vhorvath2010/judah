@@ -6,7 +6,9 @@ import speech_recognition as sr
 from judah.dependencies import conversation_runner, audio_input_engine
 
 logging.basicConfig(level=logging.INFO)
-warnings.filterwarnings("ignore", category=FutureWarning)  # Ignore annoying PyTorch warning from Whisper
+warnings.filterwarnings(
+    "ignore", category=FutureWarning
+)  # Ignore annoying PyTorch warning from Whisper
 
 
 def get_next_conversation_starter() -> str:
@@ -24,8 +26,12 @@ def get_next_conversation_starter() -> str:
             break
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     while True:
-        print('Say a phrase including the "Judah" wake word to start a new conversation!')
+        print(
+            'Say a phrase including the "Judah" wake word to start a new conversation!'
+        )
         user_message = get_next_conversation_starter()
-        conversation_runner.run_conversation_to_completion(starting_user_message=user_message)
+        conversation_runner.run_conversation_to_completion(
+            starting_user_message=user_message
+        )

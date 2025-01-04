@@ -13,5 +13,9 @@ class FunctionInvoker:
             if function.get_description().get("function").get("name") == function_name:
                 logging.info(f"Invoking function with name {function_name}")
                 return function.invoke()
-        logging.error(f"Function with name {function_name} not found in available functions!")
-        raise ValueError(f"Function with name {function_name} not found in available functions!")
+        logging.error(
+            f"Function with name {function_name} not found in available functions!"
+        )
+        raise ValueError(
+            f"Function with name {function_name} not found in available functions!"
+        )

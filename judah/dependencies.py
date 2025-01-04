@@ -10,10 +10,15 @@ end_conversation_function = EndConversationFunction()
 available_functions = [end_conversation_function]
 function_invoker = FunctionInvoker(available_functions=available_functions)
 
-openai_connector = OpenAIConnector(api_key=os.environ.get("OPENAI_API_KEY"),
-                                   available_tools=[function.get_description() for function in available_functions])
+openai_connector = OpenAIConnector(
+    api_key=os.environ.get("OPENAI_API_KEY"),
+    available_tools=[function.get_description() for function in available_functions],
+)
 
 audio_input_engine = AudioInputEngine()
 
-conversation_runner = ConversationRunner(openai_connector=openai_connector, audio_input_engine=audio_input_engine,
-                                         function_invoker=function_invoker)
+conversation_runner = ConversationRunner(
+    openai_connector=openai_connector,
+    audio_input_engine=audio_input_engine,
+    function_invoker=function_invoker,
+)
