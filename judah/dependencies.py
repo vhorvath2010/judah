@@ -3,7 +3,7 @@ import os
 from judah.audio.audio_input_engine import AudioInputEngine
 from judah.audio.audio_output_engine import AudioOutputEngine
 from judah.connectors.todoist_connector import TodoistConnector
-from judah.conversation_runner import ConversationRunner
+from judah.conversation.conversation_runner import ConversationRunner
 from judah.functions.end_conversation import EndConversationFunction
 from judah.functions.function_invoker import FunctionInvoker
 from judah.connectors.openai_connector import OpenAIConnector

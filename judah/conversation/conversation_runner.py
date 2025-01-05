@@ -2,6 +2,7 @@ from typing import Optional
 
 from judah.audio.audio_input_engine import AudioInputEngine
 from judah.audio.audio_output_engine import AudioOutputEngine
+from judah.conversation.prompt_builder import PromptBuilder
 from judah.functions.function_invoker import FunctionInvoker
 from judah.functions.function_result import FunctionSignal, FunctionResult
 from judah.connectors.openai_connector import OpenAIConnector
@@ -33,13 +34,13 @@ class ConversationRunner:
                 if command_result.context:
                     self._answer_from_context(
                         user_message=user_message,
-                        context_from_functions=command_result.context,
+                        function_call_context=command_result.context,
                     )
 
     def _run_user_command(self, user_message: str) -> Optional[FunctionResult]:
         print(f"You: {user_message}")
         stream = self._openai_connector.create_completion(
-            messages=[{"role": "user", "content": user_message}]
+            messages=PromptBuilder.build_messages(user_message=user_message)
         )
         print("Judah: ", end="")
         for chunk in stream:
@@ -54,17 +55,12 @@ class ConversationRunner:
         print("\n")
         return None
 
-    def _answer_from_context(self, user_message: str, context_from_functions: str):
+    def _answer_from_context(self, user_message: str, function_call_context: str):
         stream = self._openai_connector.create_completion(
-            messages=[
-                {"role": "user", "content": user_message},
-                {
-                    "role": "system",
-                    "content": f"You retrieved the following data from a function call: {context_from_functions}",
-                },
-            ]
+            messages=PromptBuilder.build_messages(
+                user_message=user_message, function_call_context=function_call_context
+            )
         )
-        print("Judah: ", end="")
         for chunk in stream:
             if chunk.choices[0].delta.content is not None:
                 self._audio_output_engine.say(chunk.choices[0].delta.content)
