@@ -5,13 +5,12 @@ import speech_recognition as sr
 
 class AudioInputEngine:
     def __init__(self):
-        microphones = sr.Microphone.list_microphone_names()
+        microphones = sr.Microphone.list_working_microphones()
         print("Working microphones found:")
-        for i, mic in enumerate(microphones):
-            print(f"{i}: {mic}")
+        for index, name in microphones.items():
+            print(f"{index}: {name}")
         microphone_index = int(input("Please select a microphone (by index): "))
         self._microphone = sr.Microphone(device_index=microphone_index)
-
         print(
             "Adjusting for ambient noise, please do not speak for the next couple of seconds..."
         )
