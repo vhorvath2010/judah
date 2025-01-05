@@ -1,3 +1,5 @@
+import re
+
 import speech_recognition as sr
 
 
@@ -22,17 +24,16 @@ class AudioInputEngine:
 
     def listen_for_user_message(self) -> str:
         with self._microphone as active_microphone:
-            audio = self._recognizer.listen(active_microphone, timeout=None)
-            result = str(
-                self._recognizer.recognize_whisper(
-                    audio, language="english", model="small.en"
-                )
-            )
-            while result == "":
+            user_message = ""
+            while not self._is_user_message_valid(user_message=user_message):
                 audio = self._recognizer.listen(active_microphone, timeout=None)
-                result = str(
+                user_message = str(
                     self._recognizer.recognize_whisper(
                         audio, language="english", model="base.en"
                     )
                 )
-            return result
+            return user_message
+
+    @staticmethod
+    def _is_user_message_valid(user_message: str) -> bool:
+        return bool(re.search(r"\w+", user_message))
