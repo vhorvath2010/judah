@@ -4,7 +4,7 @@ from judah.audio.audio_input_engine import AudioInputEngine
 from judah.audio.audio_output_engine import AudioOutputEngine
 from judah.functions.function_invoker import FunctionInvoker
 from judah.functions.function_signal import FunctionSignal
-from judah.openai_connector import OpenAIConnector
+from judah.connectors.openai_connector import OpenAIConnector
 
 
 class ConversationRunner:

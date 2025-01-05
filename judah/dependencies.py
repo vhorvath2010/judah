@@ -2,12 +2,17 @@ import os
 
 from judah.audio.audio_input_engine import AudioInputEngine
 from judah.audio.audio_output_engine import AudioOutputEngine
+from judah.connectors.todoist_connector import TodoistConnector
 from judah.conversation_runner import ConversationRunner
 from judah.functions.end_conversation import EndConversationFunction
 from judah.functions.function_invoker import FunctionInvoker
-from judah.openai_connector import OpenAIConnector
+from judah.connectors.openai_connector import OpenAIConnector
 
 end_conversation_function = EndConversationFunction()
+
+if os.environ.get("TODOIST_API_KEY") is not None:
+    todoist_connector = TodoistConnector(api_key=os.environ.get("TODOIST_API_KEY"))
+
 available_functions = [end_conversation_function]
 function_invoker = FunctionInvoker(available_functions=available_functions)
 
