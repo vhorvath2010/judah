@@ -2,7 +2,7 @@ from abc import abstractmethod, ABC
 
 from openai.types.chat import ChatCompletionToolParam
 
-from judah.functions.function_signal import FunctionSignal
+from judah.functions.function_result import FunctionResult
 
 
 class OpenAIFunction(ABC):
@@ -12,5 +12,5 @@ class OpenAIFunction(ABC):
         """Get the openai tool description for the function"""
 
     @abstractmethod
-    def invoke(self) -> FunctionSignal:
+    def invoke(self) -> FunctionResult:
         """Invoke the function"""

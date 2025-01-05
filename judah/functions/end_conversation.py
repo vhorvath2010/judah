@@ -1,6 +1,6 @@
 from openai.types.chat import ChatCompletionToolParam
 
-from judah.functions.function_signal import FunctionSignal
+from judah.functions.function_result import FunctionSignal, FunctionResult
 from judah.functions.openai_function import OpenAIFunction
 
 
@@ -15,5 +15,5 @@ class EndConversationFunction(OpenAIFunction):
             },
         }
 
-    def invoke(self):
-        return FunctionSignal.STOP_CONVERSATION
+    def invoke(self) -> FunctionResult:
+        return FunctionResult(signal=FunctionSignal.STOP_CONVERSATION)

@@ -1,8 +1,6 @@
 import logging
 import warnings
 
-import speech_recognition as sr
-
 from judah.dependencies import conversation_runner, audio_input_engine
 
 logging.basicConfig(level=logging.INFO)

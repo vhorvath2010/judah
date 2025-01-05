@@ -7,13 +7,17 @@ from judah.conversation_runner import ConversationRunner
 from judah.functions.end_conversation import EndConversationFunction
 from judah.functions.function_invoker import FunctionInvoker
 from judah.connectors.openai_connector import OpenAIConnector
+from judah.functions.get_todo_items import GetTodoItemsFunction
+from judah.functions.openai_function import OpenAIFunction
 
 end_conversation_function = EndConversationFunction()
+available_functions: list[OpenAIFunction] = [end_conversation_function]
 
 if os.environ.get("TODOIST_API_KEY") is not None:
     todoist_connector = TodoistConnector(api_key=os.environ.get("TODOIST_API_KEY"))
+    get_todo_items_function = GetTodoItemsFunction(todoist_connector=todoist_connector)
+    available_functions.append(get_todo_items_function)
 
-available_functions = [end_conversation_function]
 function_invoker = FunctionInvoker(available_functions=available_functions)
 
 openai_api_key = os.environ.get("OPENAI_API_KEY")
