@@ -1,11 +1,17 @@
 from typing import Optional
 
+from openai.types.chat import (
+    ChatCompletionMessageParam,
+)
+
 from judah.audio.audio_input_engine import AudioInputEngine
 from judah.audio.audio_output_engine import AudioOutputEngine
-from judah.conversation.prompt_builder import PromptBuilder
+from judah.conversation.prompt_builder import ChatMessageFactory
 from judah.functions.function_invoker import FunctionInvoker
 from judah.functions.function_result import FunctionSignal, FunctionResult
 from judah.connectors.openai_connector import OpenAIConnector
+
+MAX_HISTORY_MESSAGES_FOR_CONTEXT = 10
 
 
 class ConversationRunner:
@@ -20,6 +26,7 @@ class ConversationRunner:
         self._audio_input_engine = audio_input_engine
         self._audio_output_engine = audio_output_engine
         self._function_invoker = function_invoker
+        self._history: list[ChatCompletionMessageParam] = []
 
     def run_conversation_to_completion(self, user_message: str):
         while True:
@@ -31,16 +38,17 @@ class ConversationRunner:
                     break
                 if command_result.context:
                     self._answer_from_context(
-                        user_message=user_message,
                         function_call_context=command_result.context,
                     )
             user_message = self._audio_input_engine.listen_for_user_message()
 
     def _run_user_command(self, user_message: str) -> Optional[FunctionResult]:
         print(f"You: {user_message}")
+        user_message_for_model = ChatMessageFactory.from_user(user_message)
         stream = self._openai_connector.create_completion(
-            messages=PromptBuilder.build_messages(user_message=user_message)
+            messages=self._build_messages(current_message=user_message_for_model)
         )
+        self._history.append(user_message_for_model)
         print("Judah: ", end="")
         for chunk in stream:
             if chunk.choices[0].delta.content is not None:
@@ -51,22 +59,32 @@ class ConversationRunner:
                     return self._function_invoker.invoke_function_by_name(
                         tool_call.function.name
                     )
-        print("\n")
+        print("\n")  # TODO: save J.U.D.A.H.'s message to history
         return None
 
-    def _answer_from_context(self, user_message: str, function_call_context: str):
+    def _answer_from_context(self, function_call_context: str):
+        function_call_context_for_model = ChatMessageFactory.from_function_call_context(
+            function_call_context
+        )
         stream = self._openai_connector.create_completion(
-            messages=PromptBuilder.build_messages(
-                user_message=user_message, function_call_context=function_call_context
+            messages=self._build_messages(
+                current_message=function_call_context_for_model
             )
         )
+        self._history.append(function_call_context_for_model)
         for chunk in stream:
             if chunk.choices[0].delta.content is not None:
                 self._audio_output_engine.say(chunk.choices[0].delta.content)
                 print(chunk.choices[0].delta.content, end="")
-            if chunk.choices[0].delta.tool_calls is not None:
-                for tool_call in chunk.choices[0].delta.tool_calls:
-                    return self._function_invoker.invoke_function_by_name(
-                        tool_call.function.name
-                    )
-        print("\n")
+        print("\n")  # TODO: save J.U.D.A.H.'s message to history
+
+    def _build_messages(
+        self,
+        current_message=ChatCompletionMessageParam,
+    ) -> list[ChatCompletionMessageParam]:
+        messages = [
+            ChatMessageFactory.get_base_instructions(),
+            *self._history[-MAX_HISTORY_MESSAGES_FOR_CONTEXT:],
+            current_message,
+        ]
+        return messages
