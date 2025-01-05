@@ -22,6 +22,4 @@ if __name__ == "__main__":
             'Say a phrase including the "Judah" wake word to start a new conversation!'
         )
         user_message = get_next_conversation_starter()
-        conversation_runner.run_conversation_to_completion(
-            starting_user_message=user_message
-        )
+        conversation_runner.run_conversation_to_completion(user_message=user_message)

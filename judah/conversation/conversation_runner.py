@@ -21,10 +21,8 @@ class ConversationRunner:
         self._audio_output_engine = audio_output_engine
         self._function_invoker = function_invoker
 
-    def run_conversation_to_completion(self, starting_user_message: str):
-        self._run_user_command(user_message=starting_user_message)
+    def run_conversation_to_completion(self, user_message: str):
         while True:
-            user_message = self._audio_input_engine.listen_for_user_message()
             command_result = self._run_user_command(user_message=user_message)
             if command_result:
                 if command_result.signal == FunctionSignal.STOP_CONVERSATION:
@@ -36,6 +34,7 @@ class ConversationRunner:
                         user_message=user_message,
                         function_call_context=command_result.context,
                     )
+            user_message = self._audio_input_engine.listen_for_user_message()
 
     def _run_user_command(self, user_message: str) -> Optional[FunctionResult]:
         print(f"You: {user_message}")
