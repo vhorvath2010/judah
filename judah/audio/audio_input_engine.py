@@ -35,4 +35,7 @@ class AudioInputEngine:
 
     @staticmethod
     def _is_user_message_valid(user_message: str) -> bool:
-        return bool(re.search(r"\w+", user_message))
+        return (
+            bool(re.search(r"\w+", user_message))
+            and "Okay. Okay. Okay." not in user_message  # This is a bug from SR
+        )
