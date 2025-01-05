@@ -8,3 +8,6 @@ class TodoistConnector:
 
     def get_tasks(self, task_filter) -> list[Task]:
         return self._todoist.get_tasks(filter=task_filter)
+
+    def complete_task(self, task_id: str) -> bool:
+        return self._todoist.close_task(task_id=task_id)

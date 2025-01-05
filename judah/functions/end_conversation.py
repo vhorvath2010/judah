@@ -15,5 +15,5 @@ class EndConversationFunction(OpenAIFunction):
             },
         }
 
-    def invoke(self) -> FunctionResult:
+    def invoke(self, arguments: dict) -> FunctionResult:
         return FunctionResult(signal=FunctionSignal.STOP_CONVERSATION)

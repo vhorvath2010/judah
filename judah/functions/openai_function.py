@@ -12,5 +12,5 @@ class OpenAIFunction(ABC):
         """Get the openai tool description for the function"""
 
     @abstractmethod
-    def invoke(self) -> FunctionResult:
+    def invoke(self, arguments: dict) -> FunctionResult:
         """Invoke the function"""

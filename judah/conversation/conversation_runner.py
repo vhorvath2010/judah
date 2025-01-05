@@ -1,3 +1,4 @@
+import json
 from typing import Optional
 
 from openai.types.chat import (
@@ -50,15 +51,26 @@ class ConversationRunner:
         )
         self._history.append(user_message_for_model)
         print("Judah: ", end="")
+        function_name = None
+        function_arguments = ""
         for chunk in stream:
-            if chunk.choices[0].delta.content is not None:
-                self._audio_output_engine.say(chunk.choices[0].delta.content)
-                print(chunk.choices[0].delta.content, end="")
-            if chunk.choices[0].delta.tool_calls is not None:
-                for tool_call in chunk.choices[0].delta.tool_calls:
-                    return self._function_invoker.invoke_function_by_name(
-                        tool_call.function.name
-                    )
+            delta = chunk.choices[0].delta
+            if delta.content is not None:
+                self._audio_output_engine.say(delta.content)
+                print(delta.content, end="")
+            if delta.tool_calls is not None:
+                for tool_call in delta.tool_calls:
+                    if tool_call.function.name:
+                        function_name = tool_call.function.name
+                    if tool_call.function.arguments:
+                        function_arguments += tool_call.function.arguments
+        if function_name:
+            return self._function_invoker.invoke_function_by_name(
+                function_name=function_name,
+                arguments=(
+                    json.loads(function_arguments) if function_arguments else {}
+                ),
+            )
         print("\n")  # TODO: save J.U.D.A.H.'s message to history
         return None
 

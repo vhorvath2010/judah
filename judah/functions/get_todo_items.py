@@ -19,7 +19,6 @@ class GetTodoItemsFunction(OpenAIFunction):
             },
         }
 
-    def invoke(self) -> FunctionResult:
-        # TODO: implement function calling args
+    def invoke(self, arguments: dict) -> FunctionResult:
         tasks = self._todoist_connector.get_tasks(task_filter="today")
         return FunctionResult(context=f"Tasks: {tasks}")
