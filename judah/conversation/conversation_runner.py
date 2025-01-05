@@ -12,7 +12,7 @@ from judah.functions.function_invoker import FunctionInvoker
 from judah.functions.function_result import FunctionSignal, FunctionResult
 from judah.connectors.openai_connector import OpenAIConnector
 
-MAX_HISTORY_MESSAGES_FOR_CONTEXT = 10
+MAX_HISTORY_MESSAGES_FOR_CONTEXT = 25
 
 
 class ConversationRunner:
@@ -51,12 +51,14 @@ class ConversationRunner:
         )
         self._history.append(user_message_for_model)
         print("Judah: ", end="")
+        message_from_judah = ""
         function_name = None
         function_arguments = ""
         for chunk in stream:
             delta = chunk.choices[0].delta
             if delta.content is not None:
                 self._audio_output_engine.say(delta.content)
+                message_from_judah += delta.content
                 print(delta.content, end="")
             if delta.tool_calls is not None:
                 for tool_call in delta.tool_calls:
@@ -64,6 +66,9 @@ class ConversationRunner:
                         function_name = tool_call.function.name
                     if tool_call.function.arguments:
                         function_arguments += tool_call.function.arguments
+        if message_from_judah:
+            self._history.append(ChatMessageFactory.from_judah(message_from_judah))
+        print("\n")
         if function_name:
             return self._function_invoker.invoke_function_by_name(
                 function_name=function_name,
@@ -71,7 +76,6 @@ class ConversationRunner:
                     json.loads(function_arguments) if function_arguments else {}
                 ),
             )
-        print("\n")  # TODO: save J.U.D.A.H.'s message to history
         return None
 
     def _answer_from_context(self, function_call_context: str):
@@ -84,11 +88,15 @@ class ConversationRunner:
             )
         )
         self._history.append(function_call_context_for_model)
+        message_from_judah = ""
         for chunk in stream:
             if chunk.choices[0].delta.content is not None:
                 self._audio_output_engine.say(chunk.choices[0].delta.content)
+                message_from_judah += chunk.choices[0].delta.content
                 print(chunk.choices[0].delta.content, end="")
-        print("\n")  # TODO: save J.U.D.A.H.'s message to history
+        print("\n")
+        if message_from_judah:
+            self._history.append(ChatMessageFactory.from_judah(message_from_judah))
 
     def _build_messages(
         self,

@@ -1,6 +1,7 @@
 from openai.types.chat import (
     ChatCompletionSystemMessageParam,
     ChatCompletionUserMessageParam,
+    ChatCompletionAssistantMessageParam,
 )
 
 
@@ -25,3 +26,7 @@ class ChatMessageFactory:
             "role": "system",
             "content": f"You retrieved the following data from a function call: {function_call_context}",
         }
+
+    @staticmethod
+    def from_judah(message: str) -> ChatCompletionAssistantMessageParam:
+        return {"role": "assistant", "content": message, "name": "judah"}
