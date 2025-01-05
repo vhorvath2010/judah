@@ -34,48 +34,6 @@ test = ["anyio[trio]", "coverage[toml] (>=7)", "exceptiongroup (>=1.2.0)", "hypo
 trio = ["trio (>=0.26.1)"]
 
 [[package]]
-name = "audioop-lts"
-version = "0.2.1"
-description = "LTS Port of Python audioop"
-optional = false
-python-versions = ">=3.13"
-files = [
-    {file = "audioop_lts-0.2.1-cp313-abi3-macosx_10_13_universal2.whl", hash = "sha256:fd1345ae99e17e6910f47ce7d52673c6a1a70820d78b67de1b7abb3af29c426a"},
-    {file = "audioop_lts-0.2.1-cp313-abi3-macosx_10_13_x86_64.whl", hash = "sha256:e175350da05d2087e12cea8e72a70a1a8b14a17e92ed2022952a4419689ede5e"},
-    {file = "audioop_lts-0.2.1-cp313-abi3-macosx_11_0_arm64.whl", hash = "sha256:4a8dd6a81770f6ecf019c4b6d659e000dc26571b273953cef7cd1d5ce2ff3ae6"},
-    {file = "audioop_lts-0.2.1-cp313-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:d1cd3c0b6f2ca25c7d2b1c3adeecbe23e65689839ba73331ebc7d893fcda7ffe"},
-    {file = "audioop_lts-0.2.1-cp313-abi3-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:ff3f97b3372c97782e9c6d3d7fdbe83bce8f70de719605bd7ee1839cd1ab360a"},
-    {file = "audioop_lts-0.2.1-cp313-abi3-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:a351af79edefc2a1bd2234bfd8b339935f389209943043913a919df4b0f13300"},
-    {file = "audioop_lts-0.2.1-cp313-abi3-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:2aeb6f96f7f6da80354330470b9134d81b4cf544cdd1c549f2f45fe964d28059"},
-    {file = "audioop_lts-0.2.1-cp313-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c589f06407e8340e81962575fcffbba1e92671879a221186c3d4662de9fe804e"},
-    {file = "audioop_lts-0.2.1-cp313-abi3-musllinux_1_2_aarch64.whl", hash = "sha256:fbae5d6925d7c26e712f0beda5ed69ebb40e14212c185d129b8dfbfcc335eb48"},
-    {file = "audioop_lts-0.2.1-cp313-abi3-musllinux_1_2_i686.whl", hash = "sha256:d2d5434717f33117f29b5691fbdf142d36573d751716249a288fbb96ba26a281"},
-    {file = "audioop_lts-0.2.1-cp313-abi3-musllinux_1_2_ppc64le.whl", hash = "sha256:f626a01c0a186b08f7ff61431c01c055961ee28769591efa8800beadd27a2959"},
-    {file = "audioop_lts-0.2.1-cp313-abi3-musllinux_1_2_s390x.whl", hash = "sha256:05da64e73837f88ee5c6217d732d2584cf638003ac72df124740460531e95e47"},
-    {file = "audioop_lts-0.2.1-cp313-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:56b7a0a4dba8e353436f31a932f3045d108a67b5943b30f85a5563f4d8488d77"},
-    {file = "audioop_lts-0.2.1-cp313-abi3-win32.whl", hash = "sha256:6e899eb8874dc2413b11926b5fb3857ec0ab55222840e38016a6ba2ea9b7d5e3"},
-    {file = "audioop_lts-0.2.1-cp313-abi3-win_amd64.whl", hash = "sha256:64562c5c771fb0a8b6262829b9b4f37a7b886c01b4d3ecdbae1d629717db08b4"},
-    {file = "audioop_lts-0.2.1-cp313-abi3-win_arm64.whl", hash = "sha256:c45317debeb64002e980077642afbd977773a25fa3dfd7ed0c84dccfc1fafcb0"},
-    {file = "audioop_lts-0.2.1-cp313-cp313t-macosx_10_13_universal2.whl", hash = "sha256:3827e3fce6fee4d69d96a3d00cd2ab07f3c0d844cb1e44e26f719b34a5b15455"},
-    {file = "audioop_lts-0.2.1-cp313-cp313t-macosx_10_13_x86_64.whl", hash = "sha256:161249db9343b3c9780ca92c0be0d1ccbfecdbccac6844f3d0d44b9c4a00a17f"},
-    {file = "audioop_lts-0.2.1-cp313-cp313t-macosx_11_0_arm64.whl", hash = "sha256:5b7b4ff9de7a44e0ad2618afdc2ac920b91f4a6d3509520ee65339d4acde5abf"},
-    {file = "audioop_lts-0.2.1-cp313-cp313t-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:72e37f416adb43b0ced93419de0122b42753ee74e87070777b53c5d2241e7fab"},
-    {file = "audioop_lts-0.2.1-cp313-cp313t-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:534ce808e6bab6adb65548723c8cbe189a3379245db89b9d555c4210b4aaa9b6"},
-    {file = "audioop_lts-0.2.1-cp313-cp313t-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:d2de9b6fb8b1cf9f03990b299a9112bfdf8b86b6987003ca9e8a6c4f56d39543"},
-    {file = "audioop_lts-0.2.1-cp313-cp313t-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:f24865991b5ed4b038add5edbf424639d1358144f4e2a3e7a84bc6ba23e35074"},
-    {file = "audioop_lts-0.2.1-cp313-cp313t-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2bdb3b7912ccd57ea53197943f1bbc67262dcf29802c4a6df79ec1c715d45a78"},
-    {file = "audioop_lts-0.2.1-cp313-cp313t-musllinux_1_2_aarch64.whl", hash = "sha256:120678b208cca1158f0a12d667af592e067f7a50df9adc4dc8f6ad8d065a93fb"},
-    {file = "audioop_lts-0.2.1-cp313-cp313t-musllinux_1_2_i686.whl", hash = "sha256:54cd4520fc830b23c7d223693ed3e1b4d464997dd3abc7c15dce9a1f9bd76ab2"},
-    {file = "audioop_lts-0.2.1-cp313-cp313t-musllinux_1_2_ppc64le.whl", hash = "sha256:d6bd20c7a10abcb0fb3d8aaa7508c0bf3d40dfad7515c572014da4b979d3310a"},
-    {file = "audioop_lts-0.2.1-cp313-cp313t-musllinux_1_2_s390x.whl", hash = "sha256:f0ed1ad9bd862539ea875fb339ecb18fcc4148f8d9908f4502df28f94d23491a"},
-    {file = "audioop_lts-0.2.1-cp313-cp313t-musllinux_1_2_x86_64.whl", hash = "sha256:e1af3ff32b8c38a7d900382646e91f2fc515fd19dea37e9392275a5cbfdbff63"},
-    {file = "audioop_lts-0.2.1-cp313-cp313t-win32.whl", hash = "sha256:f51bb55122a89f7a0817d7ac2319744b4640b5b446c4c3efcea5764ea99ae509"},
-    {file = "audioop_lts-0.2.1-cp313-cp313t-win_amd64.whl", hash = "sha256:f0f2f336aa2aee2bce0b0dcc32bbba9178995454c7b979cf6ce086a8801e14c7"},
-    {file = "audioop_lts-0.2.1-cp313-cp313t-win_arm64.whl", hash = "sha256:78bfb3703388c780edf900be66e07de5a3d4105ca8e8720c5c4d67927e0b15d0"},
-    {file = "audioop_lts-0.2.1.tar.gz", hash = "sha256:e81268da0baa880431b68b1308ab7257eb33f356e57a5f9b1f915dfb13dd1387"},
-]
-
-[[package]]
 name = "black"
 version = "24.10.0"
 description = "The uncompromising code formatter."
@@ -303,6 +261,20 @@ files = [
 ]
 
 [[package]]
+name = "emoji"
+version = "2.14.0"
+description = "Emoji for Python"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "emoji-2.14.0-py3-none-any.whl", hash = "sha256:fcc936bf374b1aec67dda5303ae99710ba88cc9cdce2d1a71c5f2204e6d78799"},
+    {file = "emoji-2.14.0.tar.gz", hash = "sha256:f68ac28915a2221667cddb3e6c589303c3c6954c6c5af6fefaec7f9bdf72fdca"},
+]
+
+[package.extras]
+dev = ["coverage", "pytest (>=7.4.4)"]
+
+[[package]]
 name = "exceptiongroup"
 version = "1.2.2"
 description = "Backport of PEP 654 (exception groups)"
@@ -370,6 +342,25 @@ test = ["aiohttp (!=4.0.0a0,!=4.0.0a1)", "numpy", "pytest", "pytest-asyncio (!=0
 test-downstream = ["aiobotocore (>=2.5.4,<3.0.0)", "dask-expr", "dask[dataframe,test]", "moto[server] (>4,<5)", "pytest-timeout", "xarray"]
 test-full = ["adlfs", "aiohttp (!=4.0.0a0,!=4.0.0a1)", "cloudpickle", "dask", "distributed", "dropbox", "dropboxdrivefs", "fastparquet", "fusepy", "gcsfs", "jinja2", "kerchunk", "libarchive-c", "lz4", "notebook", "numpy", "ocifs", "pandas", "panel", "paramiko", "pyarrow", "pyarrow (>=1)", "pyftpdlib", "pygit2", "pytest", "pytest-asyncio (!=0.22.0)", "pytest-benchmark", "pytest-cov", "pytest-mock", "pytest-recording", "pytest-rerunfailures", "python-snappy", "requests", "smbprotocol", "tqdm", "urllib3", "zarr", "zstandard"]
 tqdm = ["tqdm"]
+
+[[package]]
+name = "gtts"
+version = "2.5.4"
+description = "gTTS (Google Text-to-Speech), a Python library and CLI tool to interface with Google Translate text-to-speech API"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "gTTS-2.5.4-py3-none-any.whl", hash = "sha256:5dd579377f9f5546893bc26315ab1f846933dc27a054764b168f141065ca8436"},
+    {file = "gtts-2.5.4.tar.gz", hash = "sha256:f5737b585f6442f677dbe8773424fd50697c75bdf3e36443585e30a8d48c1884"},
+]
+
+[package.dependencies]
+click = ">=7.1,<8.2"
+requests = ">=2.27,<3"
+
+[package.extras]
+docs = ["sphinx", "sphinx-autobuild", "sphinx-click", "sphinx-mdinclude", "sphinx-rtd-theme"]
+tests = ["pytest (>=7.1.3,<8.4.0)", "pytest-cov", "testfixtures"]
 
 [[package]]
 name = "h11"
@@ -555,6 +546,17 @@ files = [
     {file = "jiter-0.8.2-cp39-cp39-win32.whl", hash = "sha256:ca29b6371ebc40e496995c94b988a101b9fbbed48a51190a4461fcb0a68b4a36"},
     {file = "jiter-0.8.2-cp39-cp39-win_amd64.whl", hash = "sha256:1c0dfbd1be3cbefc7510102370d86e35d1d53e5a93d48519688b1bf0f761160a"},
     {file = "jiter-0.8.2.tar.gz", hash = "sha256:cd73d3e740666d0e639f678adb176fad25c1bcbdae88d8d7b857e1783bb4212d"},
+]
+
+[[package]]
+name = "joblib"
+version = "1.4.2"
+description = "Lightweight pipelining with Python functions"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "joblib-1.4.2-py3-none-any.whl", hash = "sha256:06d478d5674cbc267e7496a410ee875abd68e4340feff4490bcb7afb88060ae6"},
+    {file = "joblib-1.4.2.tar.gz", hash = "sha256:2382c5816b2636fbd20a09e0f4e9dad4736765fdfb7dca582943b9c1366b3f0e"},
 ]
 
 [[package]]
@@ -773,6 +775,31 @@ doc = ["intersphinx-registry", "myst-nb (>=1.1)", "numpydoc (>=1.8.0)", "pillow 
 example = ["cairocffi (>=1.7)", "contextily (>=1.6)", "igraph (>=0.11)", "momepy (>=0.7.2)", "osmnx (>=1.9)", "scikit-learn (>=1.5)", "seaborn (>=0.13)"]
 extra = ["lxml (>=4.6)", "pydot (>=3.0.1)", "pygraphviz (>=1.14)", "sympy (>=1.10)"]
 test = ["pytest (>=7.2)", "pytest-cov (>=4.0)"]
+
+[[package]]
+name = "nltk"
+version = "3.9.1"
+description = "Natural Language Toolkit"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "nltk-3.9.1-py3-none-any.whl", hash = "sha256:4fa26829c5b00715afe3061398a8989dc643b92ce7dd93fb4585a70930d168a1"},
+    {file = "nltk-3.9.1.tar.gz", hash = "sha256:87d127bd3de4bd89a4f81265e5fa59cb1b199b27440175370f7417d2bc7ae868"},
+]
+
+[package.dependencies]
+click = "*"
+joblib = "*"
+regex = ">=2021.8.3"
+tqdm = "*"
+
+[package.extras]
+all = ["matplotlib", "numpy", "pyparsing", "python-crfsuite", "requests", "scikit-learn", "scipy", "twython"]
+corenlp = ["requests"]
+machine-learning = ["numpy", "python-crfsuite", "scikit-learn", "scipy"]
+plot = ["matplotlib"]
+tgrep = ["pyparsing"]
+twitter = ["twython"]
 
 [[package]]
 name = "nodeenv"
@@ -1132,6 +1159,26 @@ pyyaml = ">=5.1"
 virtualenv = ">=20.10.0"
 
 [[package]]
+name = "protobuf"
+version = "5.29.2"
+description = ""
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "protobuf-5.29.2-cp310-abi3-win32.whl", hash = "sha256:c12ba8249f5624300cf51c3d0bfe5be71a60c63e4dcf51ffe9a68771d958c851"},
+    {file = "protobuf-5.29.2-cp310-abi3-win_amd64.whl", hash = "sha256:842de6d9241134a973aab719ab42b008a18a90f9f07f06ba480df268f86432f9"},
+    {file = "protobuf-5.29.2-cp38-abi3-macosx_10_9_universal2.whl", hash = "sha256:a0c53d78383c851bfa97eb42e3703aefdc96d2036a41482ffd55dc5f529466eb"},
+    {file = "protobuf-5.29.2-cp38-abi3-manylinux2014_aarch64.whl", hash = "sha256:494229ecd8c9009dd71eda5fd57528395d1eacdf307dbece6c12ad0dd09e912e"},
+    {file = "protobuf-5.29.2-cp38-abi3-manylinux2014_x86_64.whl", hash = "sha256:b6b0d416bbbb9d4fbf9d0561dbfc4e324fd522f61f7af0fe0f282ab67b22477e"},
+    {file = "protobuf-5.29.2-cp38-cp38-win32.whl", hash = "sha256:e621a98c0201a7c8afe89d9646859859be97cb22b8bf1d8eacfd90d5bda2eb19"},
+    {file = "protobuf-5.29.2-cp38-cp38-win_amd64.whl", hash = "sha256:13d6d617a2a9e0e82a88113d7191a1baa1e42c2cc6f5f1398d3b054c8e7e714a"},
+    {file = "protobuf-5.29.2-cp39-cp39-win32.whl", hash = "sha256:36000f97ea1e76e8398a3f02936aac2a5d2b111aae9920ec1b769fc4a222c4d9"},
+    {file = "protobuf-5.29.2-cp39-cp39-win_amd64.whl", hash = "sha256:2d2e674c58a06311c8e99e74be43e7f3a8d1e2b2fdf845eaa347fbd866f23355"},
+    {file = "protobuf-5.29.2-py3-none-any.whl", hash = "sha256:fde4554c0e578a5a0bcc9a276339594848d1e89f9ea47b4427c80e5d72f90181"},
+    {file = "protobuf-5.29.2.tar.gz", hash = "sha256:b2cc8e8bb7c9326996f0e160137b0861f1a82162502658df2951209d0cb0309e"},
+]
+
+[[package]]
 name = "pyaudio"
 version = "0.2.14"
 description = "Cross-platform audio I/O with PortAudio"
@@ -1287,6 +1334,17 @@ files = [
 
 [package.dependencies]
 typing-extensions = ">=4.6.0,<4.7.0 || >4.7.0"
+
+[[package]]
+name = "pydub"
+version = "0.25.1"
+description = "Manipulate audio with an simple and easy high level interface"
+optional = false
+python-versions = "*"
+files = [
+    {file = "pydub-0.25.1-py2.py3-none-any.whl", hash = "sha256:65617e33033874b59d87db603aa1ed450633288aefead953b30bded59cb599a6"},
+    {file = "pydub-0.25.1.tar.gz", hash = "sha256:980a33ce9949cab2a569606b65674d748ecbca4f0796887fd6f46173a7b0d30f"},
+]
 
 [[package]]
 name = "pyobjc"
@@ -4413,6 +4471,38 @@ files = [
 ]
 
 [[package]]
+name = "realtimetts"
+version = "0.4.21"
+description = "Stream text into audio with an easy-to-use, highly configurable library delivering voice output with minimal latency."
+optional = false
+python-versions = "<3.13,>=3.9"
+files = [
+    {file = "realtimetts-0.4.21-py3-none-any.whl", hash = "sha256:26f8a7939b7f963003e216347c2b6a31f2eb56bfc901d70fda106dcf32c8ab80"},
+    {file = "realtimetts-0.4.21.tar.gz", hash = "sha256:67b86b6b230811a2a9ff2fc6ad30dc5a196928d2e40e982faf523f431665b876"},
+]
+
+[package.dependencies]
+gtts = {version = "2.5.4", optional = true, markers = "extra == \"gtts\""}
+pyaudio = "0.2.14"
+pydub = "0.25.1"
+pyttsx3 = {version = "2.98", optional = true, markers = "extra == \"system\""}
+resampy = "0.4.3"
+stream2sentence = "0.3.0"
+
+[package.extras]
+all = ["azure-cognitiveservices-speech (==1.41.1)", "coqui-tts (==0.25.1)", "edge-tts (==7.0.0)", "elevenlabs (==1.50.1)", "gtts (==2.5.4)", "openai (==1.57.4)", "pyaudio (==0.2.14)", "pydub (==0.25.1)", "pyttsx3 (==2.98)", "resampy (==0.4.3)", "stream2sentence (==0.3.0)"]
+azure = ["azure-cognitiveservices-speech (==1.41.1)", "pyaudio (==0.2.14)", "pydub (==0.25.1)", "resampy (==0.4.3)", "stream2sentence (==0.3.0)"]
+coqui = ["coqui-tts (==0.25.1)", "pyaudio (==0.2.14)", "pydub (==0.25.1)", "resampy (==0.4.3)", "stream2sentence (==0.3.0)"]
+edge = ["edge-tts (==7.0.0)", "pyaudio (==0.2.14)", "pydub (==0.25.1)", "resampy (==0.4.3)", "stream2sentence (==0.3.0)"]
+elevenlabs = ["elevenlabs (==1.50.1)", "pyaudio (==0.2.14)", "pydub (==0.25.1)", "resampy (==0.4.3)", "stream2sentence (==0.3.0)"]
+gtts = ["gtts (==2.5.4)", "pyaudio (==0.2.14)", "pydub (==0.25.1)", "resampy (==0.4.3)", "stream2sentence (==0.3.0)"]
+jp = ["cutlet", "mecab-python3 (==1.0.6)", "pyaudio (==0.2.14)", "pydub (==0.25.1)", "resampy (==0.4.3)", "stream2sentence (==0.3.0)", "unidic-lite (==1.0.8)"]
+ko = ["hangul-romanize", "pyaudio (==0.2.14)", "pydub (==0.25.1)", "resampy (==0.4.3)", "stream2sentence (==0.3.0)"]
+minimal = ["pyaudio (==0.2.14)", "pydub (==0.25.1)", "resampy (==0.4.3)", "stream2sentence (==0.3.0)"]
+openai = ["openai (==1.57.4)", "pyaudio (==0.2.14)", "pydub (==0.25.1)", "resampy (==0.4.3)", "stream2sentence (==0.3.0)"]
+system = ["pyaudio (==0.2.14)", "pydub (==0.25.1)", "pyttsx3 (==2.98)", "resampy (==0.4.3)", "stream2sentence (==0.3.0)"]
+
+[[package]]
 name = "regex"
 version = "2024.11.6"
 description = "Alternative regular expression module, to replace re."
@@ -4537,6 +4627,26 @@ socks = ["PySocks (>=1.5.6,!=1.5.7)"]
 use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
+name = "resampy"
+version = "0.4.3"
+description = "Efficient signal resampling"
+optional = false
+python-versions = "*"
+files = [
+    {file = "resampy-0.4.3-py3-none-any.whl", hash = "sha256:ad2ed64516b140a122d96704e32bc0f92b23f45419e8b8f478e5a05f83edcebd"},
+    {file = "resampy-0.4.3.tar.gz", hash = "sha256:a0d1c28398f0e55994b739650afef4e3974115edbe96cd4bb81968425e916e47"},
+]
+
+[package.dependencies]
+numba = ">=0.53"
+numpy = ">=1.17"
+
+[package.extras]
+design = ["optuna (>=2.10.0)"]
+docs = ["numpydoc", "sphinx (!=1.3.1)"]
+tests = ["pytest (<8)", "pytest-cov", "scipy (>=1.1)"]
+
+[[package]]
 name = "setuptools"
 version = "75.6.0"
 description = "Easily download, build, install, upgrade, and uninstall Python packages"
@@ -4579,8 +4689,6 @@ files = [
 ]
 
 [package.dependencies]
-audioop-lts = {version = "*", markers = "python_version >= \"3.13\""}
-standard-aifc = {version = "*", markers = "python_version >= \"3.13\""}
 typing-extensions = "*"
 
 [package.extras]
@@ -4594,30 +4702,49 @@ pocketsphinx = ["pocketsphinx (<5)"]
 whisper-local = ["openai-whisper", "soundfile"]
 
 [[package]]
-name = "standard-aifc"
-version = "3.13.0"
-description = "Standard library aifc redistribution. \"dead battery\"."
+name = "stanza"
+version = "1.9.2"
+description = "A Python NLP Library for Many Human Languages, by the Stanford NLP Group"
 optional = false
-python-versions = "*"
+python-versions = ">=3.8"
 files = [
-    {file = "standard_aifc-3.13.0-py3-none-any.whl", hash = "sha256:f7ae09cc57de1224a0dd8e3eb8f73830be7c3d0bc485de4c1f82b4a7f645ac66"},
-    {file = "standard_aifc-3.13.0.tar.gz", hash = "sha256:64e249c7cb4b3daf2fdba4e95721f811bde8bdfc43ad9f936589b7bb2fae2e43"},
+    {file = "stanza-1.9.2-py3-none-any.whl", hash = "sha256:d869c4bbd61c52422bd263ee72d6d225e2235b18b0b00b5eff3d86a14b210553"},
+    {file = "stanza-1.9.2.tar.gz", hash = "sha256:36a93f60bf470e6026122eacab291751ad401fe3279e2d022fffef5cb35903e5"},
 ]
 
 [package.dependencies]
-audioop-lts = {version = "*", markers = "python_version >= \"3.13\""}
-standard-chunk = {version = "*", markers = "python_version >= \"3.13\""}
+emoji = "*"
+networkx = "*"
+numpy = "*"
+protobuf = ">=3.15.0"
+requests = "*"
+tomli = {version = "*", markers = "python_version < \"3.11\""}
+torch = ">=1.3.0"
+tqdm = "*"
+
+[package.extras]
+datasets = ["datasets"]
+dev = ["check-manifest"]
+test = ["coverage", "pytest"]
+tokenizers = ["jieba", "pythainlp", "python-crfsuite", "spacy", "sudachidict-core", "sudachipy"]
+transformers = ["peft (>=0.6.1)", "transformers (>=3.0.0)"]
+visualization = ["ipython", "spacy", "streamlit"]
 
 [[package]]
-name = "standard-chunk"
-version = "3.13.0"
-description = "Standard library chunk redistribution. \"dead battery\"."
+name = "stream2sentence"
+version = "0.3.0"
+description = "Real-time processing and delivery of sentences from a continuous stream of characters or text chunks."
 optional = false
-python-versions = "*"
+python-versions = ">=3.6"
 files = [
-    {file = "standard_chunk-3.13.0-py3-none-any.whl", hash = "sha256:17880a26c285189c644bd5bd8f8ed2bdb795d216e3293e6dbe55bbd848e2982c"},
-    {file = "standard_chunk-3.13.0.tar.gz", hash = "sha256:4ac345d37d7e686d2755e01836b8d98eda0d1a3ee90375e597ae43aaf064d654"},
+    {file = "stream2sentence-0.3.0-py3-none-any.whl", hash = "sha256:0a2df92b3dd9c7aa3e4c49de5ab329ddaa2f20b359f9903d3f52d9fa4f719045"},
+    {file = "stream2sentence-0.3.0.tar.gz", hash = "sha256:b55bab6c975fa88108a52abae59b1dd44f91b99815585304aadd817c0999e934"},
 ]
+
+[package.dependencies]
+emoji = "2.14.0"
+nltk = "3.9.1"
+stanza = "1.9.2"
 
 [[package]]
 name = "sympy"
@@ -4869,5 +4996,5 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 
 [metadata]
 lock-version = "2.0"
-python-versions = "^3.10"
-content-hash = "aaf9a3ed5eda6574641e2489c937c9d001d65fd63e65235a3c13cb4ae510b4f2"
+python-versions = ">=3.10,<3.13"
+content-hash = "e520ffc0e0a2afaba4b45361e4a3934375dc5b2c9b99faeff1ac981aaf24127b"

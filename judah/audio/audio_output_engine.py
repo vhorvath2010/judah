@@ -1,10 +1,12 @@
-import pyttsx3
+from RealtimeTTS import SystemEngine, TextToAudioStream
 
 
 class AudioOutputEngine:
     def __init__(self):
-        self._engine = pyttsx3.init()
+        self._engine = SystemEngine(voice="David")
+        self._stream = TextToAudioStream(engine=self._engine)
 
-    def say(self, text):
-        self._engine.say(text)
-        self._engine.runAndWait()
+    def say(self, text_chunk):
+        self._stream.feed(text_chunk)
+        if not self._stream.is_playing():
+            self._stream.play_async()

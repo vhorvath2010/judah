@@ -26,7 +26,7 @@ class ConversationRunner:
             user_message = self._audio_input_engine.listen_for_user_message()
             command_result = self._run_user_command(user_message=user_message)
             if command_result == FunctionSignal.STOP_CONVERSATION:
-                print("Judah: Goodbye!")
+                print("Goodbye!")
                 self._audio_output_engine.say("Goodbye!")
                 break
 
