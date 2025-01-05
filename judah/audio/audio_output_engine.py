@@ -9,4 +9,4 @@ class AudioOutputEngine:
     def say(self, text_chunk):
         self._stream.feed(text_chunk)
         if not self._stream.is_playing():
-            self._stream.play_async()
+            self._stream.play_async(fast_sentence_fragment_allsentences_multiple=True)
