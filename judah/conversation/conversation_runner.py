@@ -30,6 +30,7 @@ class ConversationRunner:
         self._history: list[ChatCompletionMessageParam] = []
 
     def run_conversation_to_completion(self, user_message: str):
+        self._history.clear()
         while True:
             command_result = self._run_user_command(user_message=user_message)
             if command_result:
