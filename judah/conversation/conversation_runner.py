@@ -43,6 +43,7 @@ class ConversationRunner:
                         function_call_context=command_result.context,
                     )
             user_message = self._audio_input_engine.listen_for_user_message()
+            self._audio_output_engine.force_stop()
 
     def _run_user_command(self, user_message: str) -> Optional[FunctionResult]:
         print(f"You: {user_message}")
