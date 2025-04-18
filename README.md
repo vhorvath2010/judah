@@ -7,7 +7,7 @@ Just Ur Dependable AI Helper
 ### Required Setup
 
 1. Set the `OPENAI_API_KEY` environment variable
-2. `poetry init`
+2. `poetry install`
 3. `poetry run python -m judah.main`
 
 ### Optional Setup
