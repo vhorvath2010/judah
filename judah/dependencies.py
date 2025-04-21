@@ -26,6 +26,7 @@ if os.environ.get("TODOIST_API_KEY") is not None:
     )
     available_functions.extend([get_todo_items_function, complete_todo_item_function])
 
+mcp_command = os.environ.get("MCP_COMMAND")
 mcp_args = os.environ.get("MCP_ARGS", "").split() if os.environ.get("MCP_ARGS") else []
 if os.environ.get("MCP_ENV"):
     mcp_env = {
