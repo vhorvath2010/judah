@@ -17,6 +17,7 @@ openai-whisper = "^20240930"
 realtimetts = { extras = ["gtts", "system"], version = "^0.4.21" }
 cffi = "^1.17.1"
 todoist-api-python = "^2.1.7"
+mcp = "^1.6.0"
 
 
 [tool.poetry.group.dev.dependencies]
