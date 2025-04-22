@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 import asyncio
 from typing import Any, Dict, List
-from mcp import ClientSession, StdioServerParameters
+from mcp import ClientSession, StdioServerParameters, stdio_client
 from openai.types.chat import ChatCompletionToolParam
 
 
@@ -23,7 +23,7 @@ class MCPConnector:
             params = StdioServerParameters(
                 command=cfg.command, args=cfg.args or [], env=cfg.env
             )
-            session = asyncio.run(ClientSession.create(params))
+            session = asyncio.run(ClientSession())
             self._sessions[cfg.name] = session
 
     def list_resources(self) -> Dict[str, Any]:

@@ -1,12 +1,11 @@
 from openai.types.chat import ChatCompletionToolParam
 
 from judah.functions.function_result import FunctionSignal, FunctionResult
-from judah.functions.openai_function import OpenAIFunction
+from judah.functions.tool import Tool
 
 
-class EndConversationFunction(OpenAIFunction):
-    @staticmethod
-    def get_description() -> ChatCompletionToolParam:
+class EndConversationFunction(Tool):
+    def get_openai_description() -> ChatCompletionToolParam:
         return {
             "type": "function",
             "function": {

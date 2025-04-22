@@ -2,11 +2,11 @@ import logging
 from typing import Iterable
 
 from judah.functions.function_result import FunctionResult
-from judah.functions.openai_function import OpenAIFunction
+from judah.functions.tool import Tool
 
 
 class FunctionInvoker:
-    def __init__(self, available_functions: Iterable[OpenAIFunction]):
+    def __init__(self, available_functions: Iterable[Tool]):
         self._available_functions = available_functions
 
     def invoke_function_by_name(
@@ -14,7 +14,7 @@ class FunctionInvoker:
     ) -> FunctionResult:
         for function in self._available_functions:
             if (
-                function.get_description().get("function", {}).get("name")
+                function.get_openai_description().get("function", {}).get("name")
                 == function_name
             ):
                 logging.info(
