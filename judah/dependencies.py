@@ -35,15 +35,6 @@ if os.environ.get("GITHUB_ACCESS_TOKEN") is not None:
         env={"GITHUB_PERSONAL_ACCESS_TOKEN": os.environ.get("GITHUB_ACCESS_TOKEN")},
     )
     mcp_connector.connect_to_server(github_mcp_params)
-print("setting up fetch")
-fetch_mcp_params = StdioServerParameters(
-    command="docker", args=["run", "-i", "--rm", "mcp/fetch"]
-)
-print("setting up fetch2")
-
-mcp_connector.connect_to_server(fetch_mcp_params)
-print("setting up fetch done")
-
 available_functions.extend(mcp_connector.get_functions())
 function_invoker = FunctionInvoker(available_functions=available_functions)
 
