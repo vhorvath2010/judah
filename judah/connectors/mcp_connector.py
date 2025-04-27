@@ -18,11 +18,9 @@ class MCPFunctionGenerator:
     ) -> Type[OpenAIFunction]:
         """
         Generate an OpenAIFunction class for a specific MCP tool.
-
         Args:
             session: The MCP client session
             tool: The tool description from MCP
-
         Returns:
             A new OpenAIFunction class for the tool
         """
@@ -33,16 +31,12 @@ class MCPFunctionGenerator:
 
         # The tool.inputSchema contains the schema specification
         if hasattr(tool, "inputSchema") and tool.inputSchema:
-            # Convert the inputSchema directly to OpenAI function parameters format
-            # The inputSchema should already be in JSON Schema format
             if "properties" in tool.inputSchema:
                 parameters["properties"] = tool.inputSchema["properties"]
 
-            # Extract required properties if present
             if "required" in tool.inputSchema:
                 parameters["required"] = tool.inputSchema["required"]
 
-        # Create a proper encapsulating function to avoid late binding issues
         def create_init(session_param, tool_param):
             def __init__(self):
                 self._session = session_param
@@ -72,14 +66,12 @@ class MCPFunctionGenerator:
 
             return invoke
 
-        # Create the class with properly bound methods
         class_dict = {
             "__init__": create_init(session, tool),
             "get_description": create_get_description(tool, parameters),
             "invoke": create_invoke(session, tool),
         }
 
-        # Create the class
         return type(class_name, (OpenAIFunction,), class_dict)
 
     @staticmethod
@@ -88,21 +80,17 @@ class MCPFunctionGenerator:
     ) -> FunctionResult:
         """
         Invoke an MCP tool and return the result.
-
         Args:
             session: The MCP client session
             tool: The tool to invoke
             arguments: The arguments to pass to the tool
-
         Returns:
             A FunctionResult with the tool's output
         """
-        loop = asyncio.get_running_loop()
+        loop = asyncio.get_event_loop()
+
         try:
-            future = asyncio.run_coroutine_threadsafe(
-                session.call_tool(tool.name, arguments), loop
-            )
-            result = future.result()
+            result = loop.run_until_complete(session.call_tool(tool.name, arguments))
             return FunctionResult(
                 signal=None,
                 context=str(result.content),
@@ -115,11 +103,7 @@ class MCPConnector:
     def __init__(self):
         self._sessions: list[ClientSession] = []
         self._exit_stack = None
-        try:
-            self._loop = asyncio.get_running_loop()
-        except RuntimeError:
-            self._loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(self._loop)
+        self._loop = None
         self._function_classes: Dict[str, Type[OpenAIFunction]] = {}
 
     async def _setup_exit_stack(self):
@@ -156,6 +140,10 @@ class MCPConnector:
         """
         Synchronous wrapper for connect_to_server_async.
         """
+        if self._loop is None:
+            self._loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(self._loop)
+
         return self._loop.run_until_complete(
             self.connect_to_server_async(server_params)
         )
@@ -179,7 +167,10 @@ class MCPConnector:
 
     def get_functions(self) -> list[OpenAIFunction]:
         """Synchronous wrapper for get_functions_async."""
-        # Use the instance loop
+        if self._loop is None:
+            self._loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(self._loop)
+
         return self._loop.run_until_complete(self.get_functions_async())
 
     async def close_async(self):
@@ -190,13 +181,7 @@ class MCPConnector:
 
     def close(self):
         """Synchronous wrapper for close_async."""
-        if self._loop and self._loop.is_running():
-            future = asyncio.run_coroutine_threadsafe(self.close_async(), self._loop)
-            future.result()
-        elif self._loop:
+        if self._loop:
             self._loop.run_until_complete(self.close_async())
             self._loop.close()
-
-        self._loop = None
-        self._sessions = []
-        self._function_classes = {}
+            self._loop = None
