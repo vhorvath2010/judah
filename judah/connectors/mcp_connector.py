@@ -97,29 +97,29 @@ class MCPFunctionGenerator:
         Returns:
             A FunctionResult with the tool's output
         """
-        # Get event loop to run the async call
-        loop = asyncio.get_event_loop()
-
-        # Run the tool invocation using the correct call_tool method
+        loop = asyncio.get_running_loop()
         try:
-            result = loop.run_until_complete(session.call_tool(tool.name, arguments))
-            # Convert the result to the new FunctionResult format
+            future = asyncio.run_coroutine_threadsafe(
+                session.call_tool(tool.name, arguments), loop
+            )
+            result = future.result()
             return FunctionResult(
-                signal=result.output if hasattr(result, "output") else result,
-                context=None,  # No content_type in call_tool result
+                signal=None,
+                context=str(result.content),
             )
         except Exception as e:
-            # Return error in the new format
-            return FunctionResult(
-                signal=None, context=str(e)  # Put the error message in the context
-            )
+            return FunctionResult(signal=None, context=str(e))
 
 
 class MCPConnector:
     def __init__(self):
         self._sessions: list[ClientSession] = []
         self._exit_stack = None
-        self._loop = None
+        try:
+            self._loop = asyncio.get_running_loop()
+        except RuntimeError:
+            self._loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(self._loop)
         self._function_classes: Dict[str, Type[OpenAIFunction]] = {}
 
     async def _setup_exit_stack(self):
@@ -156,10 +156,6 @@ class MCPConnector:
         """
         Synchronous wrapper for connect_to_server_async.
         """
-        if self._loop is None:
-            self._loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(self._loop)
-
         return self._loop.run_until_complete(
             self.connect_to_server_async(server_params)
         )
@@ -183,10 +179,7 @@ class MCPConnector:
 
     def get_functions(self) -> list[OpenAIFunction]:
         """Synchronous wrapper for get_functions_async."""
-        if self._loop is None:
-            self._loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(self._loop)
-
+        # Use the instance loop
         return self._loop.run_until_complete(self.get_functions_async())
 
     async def close_async(self):
@@ -197,7 +190,13 @@ class MCPConnector:
 
     def close(self):
         """Synchronous wrapper for close_async."""
-        if self._loop:
+        if self._loop and self._loop.is_running():
+            future = asyncio.run_coroutine_threadsafe(self.close_async(), self._loop)
+            future.result()
+        elif self._loop:
             self._loop.run_until_complete(self.close_async())
             self._loop.close()
-            self._loop = None
+
+        self._loop = None
+        self._sessions = []
+        self._function_classes = {}
