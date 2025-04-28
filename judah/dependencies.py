@@ -1,27 +1,41 @@
 import os
 
+from mcp import StdioServerParameters
+
 from judah.audio.audio_input_engine import AudioInputEngine
 from judah.audio.audio_output_engine import AudioOutputEngine
-from judah.connectors.todoist_connector import TodoistConnector
+from judah.connectors.mcp_connector import MCPConnector
 from judah.conversation.conversation_runner import ConversationRunner
-from judah.functions.complete_todo_item import CompleteTodoItemFunction
 from judah.functions.end_conversation import EndConversationFunction
 from judah.functions.function_invoker import FunctionInvoker
 from judah.connectors.openai_connector import OpenAIConnector
-from judah.functions.get_todo_items import GetTodoItemsFunction
 from judah.functions.openai_function import OpenAIFunction
 
 end_conversation_function = EndConversationFunction()
 available_functions: list[OpenAIFunction] = [end_conversation_function]
-
+mcp_connector = MCPConnector()
 if os.environ.get("TODOIST_API_KEY") is not None:
-    todoist_connector = TodoistConnector(api_key=os.environ.get("TODOIST_API_KEY"))
-    get_todo_items_function = GetTodoItemsFunction(todoist_connector=todoist_connector)
-    complete_todo_item_function = CompleteTodoItemFunction(
-        todoist_connector=todoist_connector
+    todoist_mcp_params = StdioServerParameters(
+        command="npx",
+        args=["-y", "@abhiz123/todoist-mcp-server"],
+        env={"TODOIST_API_TOKEN": os.environ.get("TODOIST_API_KEY")},
     )
-    available_functions.extend([get_todo_items_function, complete_todo_item_function])
-
+    mcp_connector.connect_to_server(todoist_mcp_params)
+if os.environ.get("GITHUB_ACCESS_TOKEN") is not None:
+    github_mcp_params = StdioServerParameters(
+        command="docker",
+        args=[
+            "run",
+            "-i",
+            "--rm",
+            "-e",
+            "GITHUB_PERSONAL_ACCESS_TOKEN",
+            "ghcr.io/github/github-mcp-server",
+        ],
+        env={"GITHUB_PERSONAL_ACCESS_TOKEN": os.environ.get("GITHUB_ACCESS_TOKEN")},
+    )
+    mcp_connector.connect_to_server(github_mcp_params)
+available_functions.extend(mcp_connector.get_functions())
 function_invoker = FunctionInvoker(available_functions=available_functions)
 
 openai_api_key = os.environ.get("OPENAI_API_KEY")
