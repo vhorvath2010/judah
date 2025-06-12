@@ -2,6 +2,8 @@
 
 Just Ur Dependable AI Helper
 
+J.U.D.A.H. is a voice A.I. assistant powered by OpenAI llm's and MCP integrations. Easily extensible to different services via MCP. Endless posibilities.
+
 ## How to Run
 
 ### Required Setup
