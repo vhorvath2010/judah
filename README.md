@@ -9,8 +9,8 @@ J.U.D.A.H. is a voice A.I. assistant powered by OpenAI llm's and MCP integration
 ### Required Setup
 
 1. Set the `OPENAI_API_KEY` environment variable
-2. `poetry install`
-3. `poetry run python -m judah.main`
+2. `uv sync`
+3. `uv run python -m judah.main`
 
 ### Optional Setup
 
